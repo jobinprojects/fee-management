@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { TextField, Button } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 import './SignUpForm.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const SignUpForm = () => {
   const [enrollmentNo, setEnrollmentNo] = useState('');
@@ -7,7 +10,6 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
   const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [state, setState] = useState('');
 
@@ -16,6 +18,29 @@ const SignUpForm = () => {
     // Add your logic here to handle form submission
     // You can access the form values using the state variables
   };
+
+  const validateEnrollmentNo = () => {
+    return /^\d+$/.test(enrollmentNo);
+  };
+
+  const validateFullName = () => {
+    return /^[A-Za-z ]+$/.test(fullName);
+  };
+
+  const validateEmail = () => {
+    // Regex pattern for email validation
+    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailPattern.test(email);
+  };
+
+  const validateMobile = () => {
+    return /^\d{10}$/.test(mobile);
+  };
+
+  const validatePostalCode = () => {
+    return /^\d{6}$/.test(postalCode);
+  };
+
 
   return (
     <div className="container">
@@ -31,98 +56,121 @@ const SignUpForm = () => {
   </div>
 </div>
 
-      <div className="form-container">
+<div className="form-container">
         <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Enrollment Number</label>
-          <input
-            type="text"
-            className="form-control"
+        <TextField
+            label="Enrollment Number"
             value={enrollmentNo}
             onChange={(e) => setEnrollmentNo(e.target.value)}
+            fullWidth
+            required
+            error={!validateEnrollmentNo() && enrollmentNo !== ''}
+            helperText={!validateEnrollmentNo() && enrollmentNo !== '' && 'Please enter only digits'}
+            style={{ marginBottom: '20px' }}
           />
-        </div>
 
-        <div className="form-group">
-          <label>Full Name</label>
-          <input
-            type="text"
-            className="form-control"
+          <TextField
+            label="Full Name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
+            fullWidth
+            required
+            error={!validateFullName() && fullName !== ''}
+            helperText={!validateFullName() && fullName !== '' && 'Please enter only characters'}
+            style={{ marginBottom: '20px' }}
           />
-        </div>
 
-        <div className="form-group">
-          <label>Email Address</label>
-          <input
-            type="email"
-            className="form-control"
+          <TextField
+            label="Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            fullWidth
+            required
+            error={!validateEmail() && email !== ''}
+            helperText={!validateEmail() && email !== '' && 'Please enter a valid email'}
+            style={{ marginBottom: '20px' }}
           />
-        </div>
 
-        <div className="form-group">
-          <label>Mobile</label>
-          <input
-            type="text"
-            className="form-control"
+          <TextField
+            label="Mobile"
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
+            fullWidth
+            required
+            error={!validateMobile() && mobile !== ''}
+            helperText={!validateMobile() && mobile !== '' && 'Please enter a valid 10-digit mobile number'}
+            style={{ marginBottom: '20px' }}
           />
-        </div>
 
-        <div className="form-group">
-          <label>Address</label>
-          <textarea
-            className="form-control"
+          <TextField
+            label="Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-          ></textarea>
-        </div>
-
-        <div className="form-group">
-          <label>City</label>
-          <input
-            type="text"
-            className="form-control"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            multiline
+            rows={4}
+            fullWidth
+            required
+            style={{ marginBottom: '20px' }}
           />
-        </div>
 
-        <div className="form-group">
-          <label>Postal Code</label>
-          <input
-            type="text"
-            className="form-control"
+          <TextField
+            label="Postal Code"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
+            fullWidth
+            required
+            error={!validatePostalCode() && postalCode !== ''}
+            helperText={!validatePostalCode() && postalCode !== '' && 'Please enter a valid 6-digit postal code'}
+            style={{ marginBottom: '20px' }}
           />
-        </div>
 
-        <div className="form-group">
-          <label>State</label>
-          <select
-            className="form-control"
+          <TextField
+            label="State"
             value={state}
             onChange={(e) => setState(e.target.value)}
+            select
+            fullWidth
+            required
+            style={{ marginBottom: '20px', textAlign: 'justify' }}
           >
-            <option value="">Select</option>
-            <option value="Maharashtra">Maharashtra</option>
-            <option value="Andhra Pradesh">Andhra Pradesh</option>
-            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-            {/* Add the remaining options */}
-          </select>
-        </div>
+            <MenuItem value="">Select</MenuItem>
+            <MenuItem value="Andhra Pradesh">Andhra Pradesh</MenuItem>
+            <MenuItem value="Arunachal Pradesh">Arunachal Pradesh</MenuItem>
+            <MenuItem value="Assam">Assam</MenuItem>
+            <MenuItem value="Bihar">Bihar</MenuItem>
+            <MenuItem value="Chhattisgarh">Chhattisgarh</MenuItem>
+            <MenuItem value="Goa">Goa</MenuItem>
+            <MenuItem value="Gujarat">Gujarat</MenuItem>
+            <MenuItem value="Haryana">Haryana</MenuItem>
+            <MenuItem value="Himachal Pradesh">Himachal Pradesh</MenuItem>
+            <MenuItem value="Jharkhand">Jharkhand</MenuItem>
+            <MenuItem value="Karnataka">Karnataka</MenuItem>
+            <MenuItem value="Kerala">Kerala</MenuItem>
+            <MenuItem value="Madhya Pradesh">Madhya Pradesh</MenuItem>
+            <MenuItem value="Maharashtra">Maharashtra</MenuItem>
+            <MenuItem value="Manipur">Manipur</MenuItem>
+            <MenuItem value="Meghalaya">Meghalaya</MenuItem>
+            <MenuItem value="Mizoram">Mizoram</MenuItem>
+            <MenuItem value="Nagaland">Nagaland</MenuItem>
+            <MenuItem value="Odisha">Odisha</MenuItem>
+            <MenuItem value="Punjab">Punjab</MenuItem>
+            <MenuItem value="Rajasthan">Rajasthan</MenuItem>
+            <MenuItem value="Sikkim">Sikkim</MenuItem>
+            <MenuItem value="Tamil Nadu">Tamil Nadu</MenuItem>
+            <MenuItem value="Telangana">Telangana</MenuItem>
+            <MenuItem value="Tripura">Tripura</MenuItem>
+            <MenuItem value="Uttar Pradesh">Uttar Pradesh</MenuItem>
+            <MenuItem value="Uttarakhand">Uttarakhand</MenuItem>
+            <MenuItem value="West Bengal">West Bengal</MenuItem>
 
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+          </TextField>
+
+          <Button type="submit" variant="contained" color="primary">
+            Submit
+          </Button>
+        </form>
+      </div>
     </div>
-</div>    
   );
 };
 

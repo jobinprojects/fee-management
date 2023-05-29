@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
   background: linear-gradient(45deg, #0ebbff 0, #ffd91d 100%) !important;
@@ -32,8 +33,7 @@
 
 .footer {
   background-color: #333;
-  padding: 20px;
-  color: white;
+  color: rgb(255, 0, 0);
   display: flex;
   justify-content: center;
 }
@@ -45,9 +45,11 @@
 }
 
 .social-links li a {
-  color: white;
+  color: rgb(255, 255, 255);
+  size-adjust: 20px;
   text-decoration: none;
 }
+
 
 
 @media (prefers-reduced-motion: no-preference) {
